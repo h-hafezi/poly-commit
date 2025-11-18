@@ -144,10 +144,26 @@ pub mod linear_codes;
 /// [hyrax]: https://eprint.iacr.org/2017/1132.pdf
 pub mod hyrax;
 
+/// A polynomial commitment scheme that combines the algebraic
+/// efficiency of KZG commitments with the lightweight opening
+/// structure of Hyrax-style protocols. The KZH construction, as
+/// introduced in KZH [CCS2025], preserves the constant-sized
+/// commitment property of KZG and supports an efficient
+/// while enabling fast openings similar to Hyrax. In contrast
+/// to Hyrax, KZH requires a trusted setup, but benefits from significantly
+/// more efficient zero-knowledge transformations.
+///
+/// This implementation follows the basic KZH construction from the
+/// cited reference. Additional properties of KZH—such as highly
+/// efficient openings at boolean points—are not implemented here.
+///
+/// [kzh]: https://eprint.iacr.org/2025/144
+pub mod kzh_k;
+
 /// `QuerySet` is the set of queries that are to be made to a set of labeled polynomials/equations
 /// `p` that have previously been committed to. Each element of a `QuerySet` is a pair of
 /// `(label, (point_label, point))`, where `label` is the label of a polynomial in `p`,
-/// `point_label` is the label for the point (e.g., "beta"), and  and `point` is the location
+/// `point_label` is the label for the point (e.g., "beta"), and `point` is the location
 /// that `p[label]` is to be queried at.
 pub type QuerySet<T> = BTreeSet<(String, (String, T))>;
 
@@ -258,7 +274,7 @@ pub trait PolynomialCommitment<F: PrimeField, P: Polynomial<F>>: Sized {
         Self::Commitment: 'a;
 
     /// Open several polynomials at one or more points each (possibly different
-    /// for each polynomial). Each entry in the in the query set of points
+    /// for each polynomial). Each entry in the query set of points
     /// contains the label of the polynomial which should be queried at that
     /// point.
     ///

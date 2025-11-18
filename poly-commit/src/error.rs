@@ -140,6 +140,10 @@ pub enum Error {
         /// The number of variables of the point
         point_nv: usize,
     },
+
+    /// The parameter provided is wrong, i.e. in the case of KZH-k, k >= 2,
+    /// otherwise it should throw this error
+    WrongParameter(String),
 }
 
 impl core::fmt::Display for Error {
@@ -249,6 +253,7 @@ impl core::fmt::Display for Error {
                     poly_nv,
                     point_nv,
                 ),
+            Error::WrongParameter(explanation) => write!(f, "Wrong PCS parameters: {}", explanation),
         }
     }
 }

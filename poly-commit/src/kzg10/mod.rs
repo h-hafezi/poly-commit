@@ -491,7 +491,7 @@ mod tests {
         pub(crate) fn trim(
             pp: &UniversalParams<E>,
             mut supported_degree: usize,
-        ) -> Result<(Powers<E>, VerifierKey<E>), Error> {
+        ) -> Result<(Powers<'_, E>, VerifierKey<E>), Error> {
             if supported_degree == 1 {
                 supported_degree += 1;
             }

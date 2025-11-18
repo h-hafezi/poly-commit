@@ -9,6 +9,7 @@ license.workspace = true
 edition.workspace = true
 description.workspace = true
 
+
 [dependencies]
 ark-serialize = { workspace = true, features = [ "derive" ] }
 ark-ff.workspace = true
@@ -26,6 +27,9 @@ hashbrown = { version = "0.15", default-features = false, features = ["inline-mo
 rand = { version = "0.8.0", optional = true }
 rayon = { version = "1", optional = true }
 merlin = { version = "3.0.0", default-features = false }
+num-bigint = "0.4.6"
+ndarray = { version = "0.17.1", features = ["serde"] }
+
 
 [[bench]]
 name = "ipa_times"

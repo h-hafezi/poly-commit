@@ -132,7 +132,7 @@ impl<'a, F: Field, P: Polynomial<F>> LabeledPolynomial<F, P> {
     ) -> Self {
         Self {
             label,
-            polynomial: polynomial,
+            polynomial,
             degree_bound,
             hiding_bound,
             _field: PhantomData,
